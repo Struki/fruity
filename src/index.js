@@ -15,6 +15,8 @@ ReactDOM.render(<App />, document.getElementById('root'));
 serviceWorker.unregister();
 
 window.addEventListener('load', function() {
+  var web3js;
+  var thor;
   // Checking if Thor has been injected by the browser
   if (typeof thor !== 'undefined') {
     // Use thor provider
@@ -26,7 +28,8 @@ window.addEventListener('load', function() {
     web3js = thorify(new Web3(), "http://localhost:8669");
   }
 
-  // Now you can start your dApp
-  startApp()
+ReactDOM.render(
+    <App web3={web3js} />,
+    document.getElementById('root')
+  )                                                                                                                    
 });
-

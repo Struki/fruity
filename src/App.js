@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { thorify } from 'thorify'
+import { extend } from 'thorify/dist/extend'
+
 import { Map } from "immutable";
 import { add, buy, inTheBlack, addItem, pouchEffectsLedger } from "merchant.js";
-// ES6 style
+
 import MetaCoin from './build/contracts/MetaCoin.json';
+const Web3 = require("web3"); // Recommend using require() instead of import here
 // Currencies
 const bites = "bites";
 
@@ -77,7 +81,17 @@ class App extends React.Component {
  	<p>{(this.state.ledger.get(bites) || 0) / 5} Bites per second</p>
 
 	<h1> Good Food Box </h1>
-        <button onClick={this.bite}> Take a bite! </button>
+        <button onClick={async function enableThor () {
+var thor;
+  try {
+    const [cometAccount] = await thor.enable();
+    return cometAccount;
+  } catch (e) {
+    console.log(`User rejected request ${e}`);
+    // handle error
+  }
+
+}}> Buy a box </button>
 	
 }
 
